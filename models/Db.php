@@ -58,9 +58,12 @@ abstract class db3
 }
 
 
-function __destruct ()
+abstract class db3
 {
-    $this->mysqli->close();
-    echo "The DB Connection has closed";
+    protected $pdo;
+
+    function __construct() {
+        $this->pdo = new PDO("mysql:host=localhost;dbname=contact;charset=utf8", "ian", "super1964");
+    }
 }
 

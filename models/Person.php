@@ -208,6 +208,7 @@ class Person extends Db2 {
 
 class PersonPDO extends db3
 {
+<<<<<<< HEAD
 
     public function getPersonById($id) {
 
@@ -262,47 +263,19 @@ class PersonPDO extends db3
 
 
 
+=======
+>>>>>>> origin/pdo2
 
+    public function getPersonById($id) {
 
+        $stmt =  $this->pdo->prepare("
+            SELECT id, last_name, first_name, middle_name, alias_name, birth_month, birth_day, birth_year, note
+            FROM person
+            WHERE id = ?");
 
+        $stmt->execute(array($id));
 
-/*
-public function getAll()
-{
-    $stmt = $this->mysqli->prepare("
-                SELECT person.id, person.last_name, person.first_name, person.middle_name, person.alias_name,
-                person.birth_month, person.birth_day, person.birth_year, person.note,
-                address.state, address.iso
-                FROM person LEFT OUTER JOIN address
-                ON person.id = address.id
-                ORDER BY person.last_name");
-
-    $stmt->execute();
-
-    $stmt->bind_result($_nameId, $_lastName, $_firstName, $_middleName, $_aliasName,
-        $_birthMonth, $_birthDay, $_birthYear, $_note, $_state, $_iso);
-
-    while($stmt->fetch()) {
-
-        $this->_objNameDOB = new Person();
-        $this->_objNameDOB->nameId = $_nameId;
-        $this->_objNameDOB->last = $_lastName;
-        $this->_objNameDOB->first = $_firstName;
-        $this->_objNameDOB->middle = $_middleName;
-        $this->_objNameDOB->alias = $_aliasName;
-        $this->_objNameDOB->birthMonth = $_birthMonth;
-        $this->_objNameDOB->birthDay = $_birthDay;
-        $this->_objNameDOB->birthYear = $_birthYear;
-        $this->_objNameDOB->note = $_note;
-        $this->_objNameDOB->state = $_state;
-        $this->_objNameDOB->countryISO = $_iso;
-
-        $this->_arrayOfObjNameDOB[] = $this->_objNameDOB;
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    $stmt->close();
-
-    return $this->_arrayOfObjNameDOB;
 }
-
-*/
