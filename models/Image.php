@@ -22,6 +22,14 @@ class ImagePDO extends Db3
     private $_id, $_personId,  $_pathFile, $_caption, $_avatar, $_visible;
     public $previousImageId, $nextImageId;
 
+
+    public function create($data){}
+    public function readAll(){}
+    public function readById($id){}
+    public function updateById($data){}
+    public function deleteById($id){}
+
+
     private function setImageParam(ImageController $image)
     {
         $this->_id = $image->getId();

@@ -23,6 +23,14 @@ class AddressPDO extends Db3 {
 
     private $_id, $_personId, $_addressType, $_countryIso, $_state, $_street, $_city, $_postalCode, $_note;
 
+
+    public function create($data){}
+    public function readAll(){}
+    public function readById($id){}
+    public function updateById($data){}
+    public function deleteById($id){}
+
+
     public function setAddressParam (AddressController $address) {
 
         $this->_id = $address->getId();

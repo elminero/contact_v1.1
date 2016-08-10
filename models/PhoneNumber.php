@@ -19,6 +19,14 @@ class PhoneNumberPDO extends Db3  {
 
     private $_id, $_personId, $_phoneNumber, $_phoneType, $_note;
 
+
+    public function create($data){}
+    public function readAll(){}
+    public function readById($id){}
+    public function updateById($data){}
+    public function deleteById($id){}
+
+
     public function setPhoneParam (PhoneNumberController $phone) {
 
         $this->_id = $phone->getId();

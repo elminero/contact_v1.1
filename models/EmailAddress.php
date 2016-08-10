@@ -19,6 +19,14 @@ class EmailAddressPDO extends Db3 {
 
     private $_id, $_personId, $_emailAddress, $_type, $_note;
 
+
+    public function create($data){}
+    public function readAll(){}
+    public function readById($id){}
+    public function updateById($data){}
+    public function deleteById($id){}
+
+
     public function setEmailParam (EmailAddressController $email) {
 
         $this->_personId = $email->getPersonId();

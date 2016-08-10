@@ -57,15 +57,19 @@ interface crud
     public function readAll();
     public function readById($id);
     public function updateById($data);
-    public function deleteById();
+    public function deleteById($id);
 }
 
 
-
-
-abstract class Db3
+abstract class Db3 implements crud
 {
     protected $pdo;
+
+    abstract public function create($data);
+    abstract public function readAll();
+    abstract public function readById($id);
+    abstract public function updateById($data);
+    abstract public function deleteById($id);
 
     function __construct($personId = null) {
         $this->personId = $personId;

@@ -25,6 +25,14 @@ class PersonPDO extends Db3
 
     private  $_id, $_lastName, $_firstName, $_middleName, $_aliasName, $_birthMonth, $_birthDay, $_birthYear, $_note;
 
+
+    public function create($data){}
+    public function readAll(){}
+    public function readById($id){}
+    public function updateById($data){}
+    public function deleteById($id){}
+
+
     private function setPersonParam(PersonController $person)
     {
         $this->_id = $person->getId();
