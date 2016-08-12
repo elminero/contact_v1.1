@@ -27,7 +27,7 @@ $action = null;
 if(isset($_GET['update'])) {
     $action = "update";
     $updateId = (int)$_GET['update'];
-    $addressData = $address->getAddressById($updateId);
+    $addressData = $address->readById($updateId);
     if($addressData == null) {
         header("Location: profile.php?id=" . $_GET["id"]);
     }

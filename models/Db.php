@@ -4,7 +4,7 @@
 // require_once(dirname(dirname(__FILE__)).'/models/tDebug.php');
 
 
-// require("tDebug.php");
+require("tDebug.php");
 
 /*
 
@@ -55,6 +55,7 @@ interface crud
 {
     public function create($data);
     public function readAll();
+ //   public function readAllByPersonId($id);
     public function readById($id);
     public function updateById($data);
     public function deleteById($id);
@@ -63,6 +64,8 @@ interface crud
 
 abstract class Db3 implements crud
 {
+    use tDebug;
+
     protected $pdo;
 
     abstract public function create($data);

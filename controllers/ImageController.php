@@ -174,7 +174,7 @@ class ImageController {
 
         $model = new ImagePDO();
 
-        $model->addImage($cImage);
+        $model->create($cImage);
 
     }
 
@@ -233,7 +233,7 @@ if( array_key_exists("imageUpLoad", $_POST)) {
 
     if( (isset($_GET['action'])) && ($_GET['action'] === 'update') ) {
         $model = new ImagePDO();
-        $model->updateImage($cImage);
+        $model->updateById($cImage);
         header("Location: ../editphotos.php?id=".$_POST['personId']."&action=update");
     }
 
@@ -245,7 +245,7 @@ if( isset($_GET['action']) && $_GET['action'] == 'delete' ) {
     $deleteId = (int)$_GET['id'];
 
     $cImage = new ImagePDO();
-    $cImage->deleteImage($deleteId);
+    $cImage->deleteById($deleteId);
 
     header("Location: ../editphotos.php?id=".$_GET['personId']."&action=update");
 

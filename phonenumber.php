@@ -34,7 +34,7 @@ if( (isset($_GET['update'])) &&  ($_GET['update'] === '') ) {
 if(isset($_GET['update'])) {
     $action = "update";
     $updateId = (int)$_GET['update'];
-    $phoneData = $phone->getPhoneNumberById($updateId);
+    $phoneData = $phone->readById($updateId);
 
     if($phoneData == null) {
         header("Location: profile.php?id=" . $_GET["id"]);

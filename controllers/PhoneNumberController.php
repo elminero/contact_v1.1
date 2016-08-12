@@ -63,13 +63,13 @@ if(array_key_exists('addPhone', $_POST))
 
 
 
-            $model->addPhoneNumber($cPhone);
+            $model->create($cPhone);
             header("Location: ../profile.php?id=".$_POST['personId']);
         }
 
         if( isset($_GET['action']) && ($_GET['action'] === 'update') ) {
 
-            $model->updatePhoneNumber($cPhone);
+            $model->updateById($cPhone);
             header("Location: ../profile.php?id=".$_POST['personId']);
         }
 
@@ -86,7 +86,7 @@ if( isset($_GET['action']) && $_GET['action'] == 'delete' ) {
 
     $deleteId = (int)$_GET['id'];
     $model = new PhoneNumberPDO();
-    $model->deletePhoneNumber($deleteId);
+    $model->deleteById($deleteId);
     header("Location: ../profile.php?id=".$_GET['personId']);
 }
 

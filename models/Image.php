@@ -23,11 +23,16 @@ class ImagePDO extends Db3
     public $previousImageId, $nextImageId;
 
 
-    public function create($data){}
-    public function readAll(){}
-    public function readById($id){}
-    public function updateById($data){}
-    public function deleteById($id){}
+//      public function create($data){}
+//      public function readAll(){}
+//      public function readAllByPersonId($id){}
+//      public function readById($id){}
+//      public function updateById($data){}
+//      public function deleteById($id){}
+
+//      public function getPersonIdByImageId($imageId){}
+//      public function setPreviousNextImageId($id){}
+//      public function getAvatarImageByPersonId($personId){}
 
 
     private function setImageParam(ImageController $image)
@@ -50,16 +55,17 @@ class ImagePDO extends Db3
 
     private function resetAvatarToZero($personId)  // class Image
     {
-        $stmt = $this->pdo->prepare("UPDATE image
-                                    SET
-                                    avatar = 0
-                                    WHERE person_id = ?");
+        $stmt = $this->pdo->prepare("
+                    UPDATE image
+                    SET
+                    avatar = 0
+                    WHERE person_id = ?");
 
         $stmt->execute(array($personId));
     }
 
 
-    public function addImage($image)  // class Image
+    public function create($image)
     {
         self::setImageParam($image);
 
@@ -68,36 +74,43 @@ class ImagePDO extends Db3
         }
 
         $stmt = $this->pdo->prepare("
-                                    INSERT INTO image
-                                    (person_id, path_file, caption, avatar, visible)
-                                    VALUES
-                                    (?, ?, ?, ?, ? )");
+                    INSERT INTO image
+                    (person_id, path_file, caption, avatar, visible)
+                    VALUES
+                    (?, ?, ?, ?, ? )");
 
         $stmt->execute([$this->_personId, $this->_pathFile, $this->_caption, $this->_avatar, $this->_visible]);
     }
 
 
-    public function updateImage($image)  // class Image
+    public function readAll()
     {
-
-        self::setImageParam($image);
-
-        if($this->_avatar === 1) {
-            self::resetAvatarToZero($this->_personId);
-        }
-
         $stmt = $this->pdo->prepare("
-                                UPDATE image
-                                SET
-                                caption = ?,
-                                avatar = ?
-                                WHERE id = ? ");
+                    SELECT id, person_id, path_file, caption, avatar, visible
+                    FROM image
+                    WHERE person_id = ? ORDER BY id DESC;");
 
-        $stmt->execute([$this->_caption, $this->_avatar,  $this->_id]);
+        $stmt->execute();
+
+        return $stmt;
     }
 
 
-    public function getImageById($id)  // class Image
+    public function readAllByPersonId($personId)
+    {
+        $stmt = $this->pdo->prepare("
+                    SELECT id, person_id, path_file, caption, avatar, visible
+                    FROM image
+                    WHERE person_id = ? ORDER BY id DESC;");
+
+
+        $stmt->execute([$personId]);
+
+        return $stmt;
+    }
+
+
+    public function readById($id)
     {
         $stmt = $this->pdo->prepare("
 					SELECT id, person_id, path_file, caption, avatar, visible
@@ -107,6 +120,35 @@ class ImagePDO extends Db3
         $stmt->execute([$id]);
 
         return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    public function updateById($image)
+    {
+        self::setImageParam($image);
+
+        if($this->_avatar === 1) {
+            self::resetAvatarToZero($this->_personId);
+        }
+
+        $stmt = $this->pdo->prepare("
+                    UPDATE image
+                    SET
+                    caption = ?,
+                    avatar = ?
+                    WHERE id = ? ");
+
+        $stmt->execute([$this->_caption, $this->_avatar,  $this->_id]);
+    }
+
+
+    public function deleteById($id)
+    {
+        $stmt = $this->pdo->prepare("
+                    DELETE FROM image
+                    WHERE id = ?");
+
+        $stmt->execute([$id]);
     }
 
 
@@ -232,38 +274,13 @@ class ImagePDO extends Db3
     {
 
         $stmt = $this->pdo->prepare("
-            SELECT id, path_file, caption, avatar, visible
-            FROM image
-            WHERE avatar = 1 AND person_id = ? LIMIT 1");
+                    SELECT id, path_file, caption, avatar, visible
+                    FROM image
+                    WHERE avatar = 1 AND person_id = ? LIMIT 1");
 
         $stmt->execute([$personId]);
 
         return $stmt->fetchObject();
-    }
-
-
-    public function getAllImageByPersonId($personId)
-    {
-
-        $stmt = $this->pdo->prepare("
-                    SELECT id, person_id, path_file, caption, avatar, visible
-                    FROM image
-                    WHERE person_id = ? ORDER BY id DESC;");
-
-
-            $stmt->execute([$personId]);
-
-        return $stmt;
-    }
-
-
-    public function deleteImage($id)
-    {
-        $stmt = $this->pdo->prepare("
-                DELETE FROM image
-                WHERE id = ?");
-
-        $stmt->execute([$id]);
     }
 
 }

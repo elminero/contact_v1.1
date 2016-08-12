@@ -3,7 +3,7 @@ require("controllers/LoginController.php");
 require("models/Person.php");
 
 $contact = new PersonPDO();
-$stmt = $contact->getAllPerson();
+$stmt = $contact->readAll();
 ?>
 
 <!DOCTYPE html>

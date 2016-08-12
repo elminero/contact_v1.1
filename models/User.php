@@ -27,6 +27,7 @@ class UserPDO extends Db3  {
 
     public function create($data){}
     public function readAll(){}
+    public function readAllByPersonId($id){}
     public function readById($id){}
     public function updateById($data){}
     public function deleteById($id){}

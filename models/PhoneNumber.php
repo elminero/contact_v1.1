@@ -19,16 +19,15 @@ class PhoneNumberPDO extends Db3  {
 
     private $_id, $_personId, $_phoneNumber, $_phoneType, $_note;
 
-
-    public function create($data){}
-    public function readAll(){}
-    public function readById($id){}
-    public function updateById($data){}
-    public function deleteById($id){}
+//    public function create($data){}
+//    public function readAll(){}
+//    public function readAllByPersonId($id){}
+//    public function readById($id){}
+//    public function updateById($data){}
+//    public function deleteById($id){}
 
 
     public function setPhoneParam (PhoneNumberController $phone) {
-
         $this->_id = $phone->getId();
         $this->_personId = $phone->getPersonId();
         $this->_phoneNumber = $phone->getNumber();
@@ -37,7 +36,7 @@ class PhoneNumberPDO extends Db3  {
     }
 
 
-    public function addPhoneNumber(PhoneNumberController $phone)  // class PhoneNumber
+    public function create($phone)
     {
         self::setPhoneParam($phone);
 
@@ -53,38 +52,19 @@ class PhoneNumberPDO extends Db3  {
     }
 
 
-    public function updatePhoneNumber($phone)  // class PhoneNumber
+    public function readAll()
     {
-        self::setPhoneParam($phone);
-
         $stmt = $this->pdo->prepare("
-                                UPDATE phone_number
-                                SET
-                                phone_number = ?,
-                                phone_type = ?,
-                                note = ?
-                                WHERE id = ? ");
+					SELECT id, phone_number, phone_type, note
+					FROM phone_number");
 
-        $stmt->execute([$this->_phoneNumber, $this->_phoneType, $this->_note, $this->_id]);
+        $stmt->execute();
 
-        return $this->_id;
+        return $stmt;
     }
 
 
-    public function getPhoneNumberById($id)  // class PhoneNumber
-    {
-        $stmt = $this->pdo->prepare("
-					SELECT id, person_id, phone_number, phone_type, note
-					FROM phone_number
-					WHERE id = ?");
-
-        $stmt->execute([$id]);
-
-        return $stmt->fetch(PDO::FETCH_OBJ);
-    }
-
-
-    public function getAllPhoneNumberByPersonId($personId)
+    public function readAllByPersonId($personId)
     {
         $stmt = $this->pdo->prepare("
 					SELECT id, phone_number, phone_type, note
@@ -97,7 +77,38 @@ class PhoneNumberPDO extends Db3  {
     }
 
 
-    public function deletePhoneNumber($id)  // class PhoneNumber
+    public function readById($id)
+    {
+        $stmt = $this->pdo->prepare("
+					SELECT id, person_id, phone_number, phone_type, note
+					FROM phone_number
+					WHERE id = ?");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    public function updateById($phone)
+    {
+        self::setPhoneParam($phone);
+
+        $stmt = $this->pdo->prepare("
+                    UPDATE phone_number
+                    SET
+                    phone_number = ?,
+                    phone_type = ?,
+                    note = ?
+                    WHERE id = ? ");
+
+        $stmt->execute([$this->_phoneNumber, $this->_phoneType, $this->_note, $this->_id]);
+
+        return $this->_id;
+    }
+
+
+    public function deleteById($id)
     {
         $stmt = $this->pdo->prepare("
                     DELETE FROM phone_number

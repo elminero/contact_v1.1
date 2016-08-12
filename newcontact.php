@@ -22,7 +22,7 @@ if(  isset($_GET['action']) && $_GET['action'] === 'update'  ) {
 
     $contact = new PersonPDO();
 
-    $updateForm = $contact->getPersonById($id);
+    $updateForm = $contact->readById($id);
 } else {
     $action = "create";
 }

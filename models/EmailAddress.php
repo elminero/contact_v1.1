@@ -19,12 +19,12 @@ class EmailAddressPDO extends Db3 {
 
     private $_id, $_personId, $_emailAddress, $_type, $_note;
 
-
-    public function create($data){}
-    public function readAll(){}
-    public function readById($id){}
-    public function updateById($data){}
-    public function deleteById($id){}
+//    public function create($data){}
+//    public function readAll(){}
+//    public function readAllByPersonId($id){}
+//    public function readById($id){}
+//    public function updateById($data){}
+//    public function deleteById($id){}
 
 
     public function setEmailParam (EmailAddressController $email) {
@@ -37,7 +37,7 @@ class EmailAddressPDO extends Db3 {
     }
 
 
-    public function addEmailAddress($email)  // class EmailAddress
+    public function create($email)
     {
         self::setEmailParam($email);
 
@@ -53,7 +53,44 @@ class EmailAddressPDO extends Db3 {
     }
 
 
-    public function updateEmailAddress($email)  // class EmailAddress
+    public function readAll()
+    {
+        $stmt = $this->pdo->prepare("
+                    SELECT id, email_address, email_type, note
+                    FROM email_address");
+
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+    public function readAllByPersonId($personId)
+    {
+        $stmt = $this->pdo->prepare("
+                    SELECT id, email_address, email_type, note
+                    FROM email_address
+                    WHERE person_id = ?");
+
+        $stmt->execute([$personId]);
+
+        return $stmt;
+    }
+
+
+    public function readById($id)
+    {
+        $stmt = $this->pdo->prepare("
+					SELECT id, person_id, email_address, email_type, note
+					FROM email_address
+					WHERE id = ?");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    public function updateById($email)
     {
         self::setEmailParam($email);
 
@@ -71,39 +108,14 @@ class EmailAddressPDO extends Db3 {
     }
 
 
-    public function getEmailAddressById($id)  // class EmailAddress
-    {
-        $stmt = $this->pdo->prepare("
-					SELECT id, person_id, email_address, email_type, note
-					FROM email_address
-					WHERE id = ?");
-
-        $stmt->execute([$id]);
-
-        return $stmt->fetch(PDO::FETCH_OBJ);
-    }
-
-
-    public function getAllEmailAddressByPersonId($personId)
-    {
-        $stmt = $this->pdo->prepare("
-                    SELECT id, email_address, email_type, note
-                    FROM email_address
-                    WHERE person_id = ?");
-
-        $stmt->execute([$personId]);
-
-        return $stmt;
-    }
-
-
-    public function deleteEmailAddress($id)  // class EmailAddress
+    public function deleteById($id)
     {
         $stmt = $this->pdo->prepare("
                     DELETE FROM email_address
                     WHERE id = ? ");
 
         $stmt->execute([$id]);
+
     }
 
 }

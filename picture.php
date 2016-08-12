@@ -38,7 +38,7 @@ ob_start();
             <li><b>Picture</b></li>
         </ol>
         <a href="addphotos.php?id=<?php echo $personId; ?>">View All</a>
-        <div style=" margin: 0 auto; width: <?php echo getimagesize( "images/" . $image->getImageById($id)->path_file . ".jpg" )[0] . "px" ; ?>;">
+        <div style=" margin: 0 auto; width: <?php echo getimagesize( "images/" . $image->readById($id)->path_file . ".jpg" )[0] . "px" ; ?>;">
             <div align="center" >
                 <nav style="width: 275px">
                     <ul class="pager" >
@@ -52,10 +52,10 @@ ob_start();
                 </nav>
             </div>
             <a href="picture.php?id=<?php echo $image->nextImageId;  ?>" >
-                <img class="img-responsive img-rounded" src="images/<?php echo $image->getImageById($id)->path_file; ?>.jpg"  />
+                <img class="img-responsive img-rounded" src="images/<?php echo $image->readById($id)->path_file; ?>.jpg"  />
             </a>
             <div class="caption" style="color: black; background-color: white; padding: 10px; margin: 10px 0; ">
-                <?php echo  $image->getImageById($id)->caption;     ?>
+                <?php echo  $image->readById($id)->caption;     ?>
             </div>
         </div>
         <?php include("includes/footer.php"); ?>

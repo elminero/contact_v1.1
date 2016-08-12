@@ -35,7 +35,7 @@ if( (isset($_GET['update'])) &&  ($_GET['update'] === '') ) {
 if(isset($_GET['update'])) {
     $action = "update";
     $updateId = (int)$_GET['update'];
-    $emailData = $email->getEmailAddressById($updateId);
+    $emailData = $email->readById($updateId);
 
     if($emailData == null) {
         header("Location: profile.php?id=" . $_GET["id"]);

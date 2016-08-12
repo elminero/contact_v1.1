@@ -16,24 +16,20 @@ class Contact extends PersonPDO
     public function getContactById()
     {
         $person = new PersonPDO();
-        $this->nameDOB = $person->getPersonById($this->personId);
-
+        $this->nameDOB = $person->readById($this->personId);
 
         $address = new AddressPDO();
-        $this->address = $address->getAllAddressByPersonId($this->personId);
-
+        $this->address = $address->readAllByPersonId($this->personId);
 
         $phoneNumber = new PhoneNumberPDO();
-        $this->phoneNumber = $phoneNumber->getAllPhoneNumberByPersonId($this->personId);
-
+        $this->phoneNumber = $phoneNumber->readAllByPersonId($this->personId);
 
         $emailAddress = new EmailAddressPDO();
-        $this->emailAddress = $emailAddress->getAllEmailAddressByPersonId($this->personId);
-
+        $this->emailAddress = $emailAddress->readAllByPersonId($this->personId);
 
         $image = new ImagePDO();
         $this->avatar = $image->getAvatarImageByPersonId($this->personId);
-        $this->image = $image->getAllImageByPersonId($this->personId);
+        $this->image = $image->readAllByPersonId($this->personId);
     }
 
 
