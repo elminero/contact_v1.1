@@ -72,7 +72,9 @@ abstract class Db3 implements crud
     abstract public function readAll();
     abstract public function readById($id);
     abstract public function updateById($data);
+
     abstract public function deleteById($id);
+
 
     function __construct($personId = null) {
         $this->personId = $personId;
