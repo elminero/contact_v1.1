@@ -20,7 +20,7 @@
 */
 
 
-class PersonPDO extends Db3
+class PersonPDO extends \dbPdo\Db
 {
 
     private  $_id, $_lastName, $_firstName, $_middleName, $_aliasName, $_birthMonth, $_birthDay, $_birthYear, $_note;
@@ -33,17 +33,17 @@ class PersonPDO extends Db3
 //    public function deleteById($id){}
 
 
-    private function setPersonParam(PersonController $person)
+    private function setPersonParam(PersonController $cPerson)
     {
-        $this->_id = $person->getId();
-        $this->_lastName = $person->getLastName();
-        $this->_firstName = $person->getFirstName();
-        $this->_middleName = $person->getMiddleName();
-        $this->_aliasName = $person->getAliasName();
-        $this->_birthMonth = $person->getBirthMonth();
-        $this->_birthDay = $person->getBirthDay();
-        $this->_birthYear = $person->getBirthYear();
-        $this->_note = $person->getNote();
+        $this->_id = $cPerson->getId();
+        $this->_lastName = $cPerson->getLastName();
+        $this->_firstName = $cPerson->getFirstName();
+        $this->_middleName = $cPerson->getMiddleName();
+        $this->_aliasName = $cPerson->getAliasName();
+        $this->_birthMonth = $cPerson->getBirthMonth();
+        $this->_birthDay = $cPerson->getBirthDay();
+        $this->_birthYear = $cPerson->getBirthYear();
+        $this->_note = $cPerson->getNote();
     }
 
 

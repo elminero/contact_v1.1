@@ -17,7 +17,7 @@ require_once(dirname(dirname(__FILE__)).'/models/Db.php');
 */
 
 
-class ImagePDO extends Db3
+class ImagePDO extends \dbPdo\Db
 {
     private $_id, $_personId,  $_pathFile, $_caption, $_avatar, $_visible;
     public $previousImageId, $nextImageId;

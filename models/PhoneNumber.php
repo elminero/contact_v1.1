@@ -15,7 +15,7 @@ require_once(dirname(dirname(__FILE__)).'/models/Db.php');
         note            text
 */
 
-class PhoneNumberPDO extends Db3  {
+class PhoneNumberPDO extends \dbPdo\Db  {
 
     private $_id, $_personId, $_phoneNumber, $_phoneType, $_note;
 

@@ -1,4 +1,5 @@
 <?php
+namespace dbPdo;
 //(tDebug) --  Db2 -- User -- Person -- Address -- PhoneNumber -- EmailAddress -- Image
 
 trait tDebug {

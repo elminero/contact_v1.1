@@ -22,8 +22,7 @@ require_once(dirname(dirname(__FILE__)).'/models/Db.php');
 */
 
 
-class UserPDO extends Db3  {
-
+class UserPDO extends \dbPdo\Db  {
 
     public function create($data){}
     public function readAll(){}
@@ -31,7 +30,6 @@ class UserPDO extends Db3  {
     public function readById($id){}
     public function updateById($data){}
     public function deleteById($id){}
-
 
     public function addUser($user)  // class Person
     {

@@ -15,7 +15,7 @@ require_once(dirname(dirname(__FILE__)).'/models/Db.php');
         note            string
 */
 
-class EmailAddressPDO extends Db3 {
+class EmailAddressPDO extends \dbPdo\Db {
 
     private $_id, $_personId, $_emailAddress, $_type, $_note;
 

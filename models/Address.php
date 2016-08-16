@@ -19,7 +19,7 @@ require_once(dirname(dirname(__FILE__)).'/models/Db.php');
 */
 
 
-class AddressPDO extends Db3 {
+class AddressPDO extends \dbPdo\Db {
 
     private $_id, $_personId, $_addressType, $_countryIso, $_state, $_street, $_city, $_postalCode, $_note;
 
